@@ -34,12 +34,16 @@
               <xs:element name="Photo" msprop:Generator_ColumnVarNameInTable="columnPhoto" msprop:Generator_ColumnPropNameInRow="Photo" msprop:Generator_ColumnPropNameInTable="PhotoColumn" msprop:Generator_UserColumnName="Photo" type="xs:string" minOccurs="0" />
               <xs:element name="UserId" msprop:Generator_ColumnVarNameInTable="columnUserId" msprop:Generator_ColumnPropNameInRow="UserId" msprop:Generator_ColumnPropNameInTable="UserIdColumn" msprop:Generator_UserColumnName="UserId" type="xs:string" minOccurs="0" />
               <xs:element name="AdditionalInformaion" msprop:Generator_ColumnVarNameInTable="columnAdditionalInformaion" msprop:Generator_ColumnPropNameInRow="AdditionalInformaion" msprop:Generator_ColumnPropNameInTable="AdditionalInformaionColumn" msprop:Generator_UserColumnName="AdditionalInformaion" type="xs:string" minOccurs="0" />
-              <xs:element name="IsManager" msprop:Generator_ColumnVarNameInTable="columnIsManager" msprop:Generator_ColumnPropNameInRow="IsManager" msprop:Generator_ColumnPropNameInTable="IsManagerColumn" msprop:Generator_UserColumnName="IsManager" type="xs:string" minOccurs="0" />
+              <xs:element name="RoleId" msprop:Generator_ColumnVarNameInTable="columnRoleId" msprop:Generator_ColumnPropNameInRow="RoleId" msprop:Generator_ColumnPropNameInTable="RoleIdColumn" msprop:Generator_UserColumnName="RoleId" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="BilingHistory" msprop:Generator_TableClassName="BilingHistoryDataTable" msprop:Generator_TableVarName="tableBilingHistory" msprop:Generator_TablePropName="BilingHistory" msprop:Generator_RowDeletingName="BilingHistoryRowDeleting" msprop:Generator_RowChangingName="BilingHistoryRowChanging" msprop:Generator_RowEvHandlerName="BilingHistoryRowChangeEventHandler" msprop:Generator_RowDeletedName="BilingHistoryRowDeleted" msprop:Generator_UserTableName="BilingHistory" msprop:Generator_RowChangedName="BilingHistoryRowChanged" msprop:Generator_RowEvArgName="BilingHistoryRowChangeEvent" msprop:Generator_RowClassName="BilingHistoryRow">
           <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" />
+              <xs:element name="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnDataColumn1" msprop:Generator_ColumnPropNameInRow="DataColumn1" msprop:Generator_ColumnPropNameInTable="DataColumn1Column" msprop:Generator_UserColumnName="DataColumn1" type="xs:string" minOccurs="0" />
+            </xs:sequence>
           </xs:complexType>
         </xs:element>
         <xs:element name="Manager" msprop:Generator_TableClassName="ManagerDataTable" msprop:Generator_TableVarName="tableManager" msprop:Generator_TablePropName="Manager" msprop:Generator_RowDeletingName="ManagerRowDeleting" msprop:Generator_RowChangingName="ManagerRowChanging" msprop:Generator_RowEvHandlerName="ManagerRowChangeEventHandler" msprop:Generator_RowDeletedName="ManagerRowDeleted" msprop:Generator_UserTableName="Manager" msprop:Generator_RowChangedName="ManagerRowChanged" msprop:Generator_RowEvArgName="ManagerRowChangeEvent" msprop:Generator_RowClassName="ManagerRow">
@@ -59,6 +63,35 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="ScheduleAvailable" msprop:Generator_TableClassName="ScheduleAvailableDataTable" msprop:Generator_TableVarName="tableScheduleAvailable" msprop:Generator_TablePropName="ScheduleAvailable" msprop:Generator_RowDeletingName="ScheduleAvailableRowDeleting" msprop:Generator_RowChangingName="ScheduleAvailableRowChanging" msprop:Generator_RowEvHandlerName="ScheduleAvailableRowChangeEventHandler" msprop:Generator_RowDeletedName="ScheduleAvailableRowDeleted" msprop:Generator_UserTableName="ScheduleAvailable" msprop:Generator_RowChangedName="ScheduleAvailableRowChanged" msprop:Generator_RowEvArgName="ScheduleAvailableRowChangeEvent" msprop:Generator_RowClassName="ScheduleAvailableRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" />
+              <xs:element name="StartTime" msprop:Generator_ColumnVarNameInTable="columnStartTime" msprop:Generator_ColumnPropNameInRow="StartTime" msprop:Generator_ColumnPropNameInTable="StartTimeColumn" msprop:Generator_UserColumnName="StartTime" type="xs:string" minOccurs="0" />
+              <xs:element name="Duration" msprop:Generator_ColumnVarNameInTable="columnDuration" msprop:Generator_ColumnPropNameInRow="Duration" msprop:Generator_ColumnPropNameInTable="DurationColumn" msprop:Generator_UserColumnName="Duration" type="xs:string" minOccurs="0" />
+              <xs:element name="DataColumn1" msprop:Generator_ColumnVarNameInTable="columnDataColumn1" msprop:Generator_ColumnPropNameInRow="DataColumn1" msprop:Generator_ColumnPropNameInTable="DataColumn1Column" msprop:Generator_UserColumnName="DataColumn1" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ScheduleAssigned" msprop:Generator_TableClassName="ScheduleAssignedDataTable" msprop:Generator_TableVarName="tableScheduleAssigned" msprop:Generator_TablePropName="ScheduleAssigned" msprop:Generator_RowDeletingName="ScheduleAssignedRowDeleting" msprop:Generator_RowChangingName="ScheduleAssignedRowChanging" msprop:Generator_RowEvHandlerName="ScheduleAssignedRowChangeEventHandler" msprop:Generator_RowDeletedName="ScheduleAssignedRowDeleted" msprop:Generator_UserTableName="ScheduleAssigned" msprop:Generator_RowChangedName="ScheduleAssignedRowChanged" msprop:Generator_RowEvArgName="ScheduleAssignedRowChangeEvent" msprop:Generator_RowClassName="ScheduleAssignedRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" />
+              <xs:element name="UserId" msprop:Generator_ColumnVarNameInTable="columnUserId" msprop:Generator_ColumnPropNameInRow="UserId" msprop:Generator_ColumnPropNameInTable="UserIdColumn" msprop:Generator_UserColumnName="UserId" type="xs:string" minOccurs="0" />
+              <xs:element name="SheduleAvailableId" msprop:Generator_ColumnVarNameInTable="columnSheduleAvailableId" msprop:Generator_ColumnPropNameInRow="SheduleAvailableId" msprop:Generator_ColumnPropNameInTable="SheduleAvailableIdColumn" msprop:Generator_UserColumnName="SheduleAvailableId" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Role" msprop:Generator_TableClassName="RoleDataTable" msprop:Generator_TableVarName="tableRole" msprop:Generator_TablePropName="Role" msprop:Generator_RowDeletingName="RoleRowDeleting" msprop:Generator_RowChangingName="RoleRowChanging" msprop:Generator_RowEvHandlerName="RoleRowChangeEventHandler" msprop:Generator_RowDeletedName="RoleRowDeleted" msprop:Generator_UserTableName="Role" msprop:Generator_RowChangedName="RoleRowChanged" msprop:Generator_RowEvArgName="RoleRowChangeEvent" msprop:Generator_RowClassName="RoleRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" />
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" type="xs:string" minOccurs="0" />
+              <xs:element name="Priority" msprop:Generator_ColumnVarNameInTable="columnPriority" msprop:Generator_ColumnPropNameInRow="Priority" msprop:Generator_ColumnPropNameInTable="PriorityColumn" msprop:Generator_UserColumnName="Priority" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="UserKey1" msdata:PrimaryKey="true">
@@ -69,12 +102,28 @@
       <xs:selector xpath=".//mstns:PersonData" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>
+    <xs:unique name="BilingHistoryKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:BilingHistory" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
     <xs:unique name="ManagerKey1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Manager" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>
     <xs:unique name="LevelKey1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:Level" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="ScheduleAvailableKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ScheduleAvailable" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="ScheduleAssignedKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ScheduleAssigned" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="RoleKey1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Role" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>
   </xs:element>
@@ -84,6 +133,7 @@
       <msdata:Relationship name="Level_User" msdata:parent="Level" msdata:child="User" msdata:parentkey="Id" msdata:childkey="LevelId" msprop:Generator_UserChildTable="User" msprop:Generator_ChildPropName="GetUserRows" msprop:Generator_UserRelationName="Level_User" msprop:Generator_RelationVarName="relationLevel_User" msprop:Generator_UserParentTable="Level" msprop:Generator_ParentPropName="LevelRow" />
       <msdata:Relationship name="Manager_User" msdata:parent="Manager" msdata:child="User" msdata:parentkey="Id" msdata:childkey="ManagerId" msprop:Generator_UserChildTable="User" msprop:Generator_ChildPropName="GetUserRows" msprop:Generator_UserRelationName="Manager_User" msprop:Generator_RelationVarName="relationManager_User" msprop:Generator_UserParentTable="Manager" msprop:Generator_ParentPropName="ManagerRow" />
       <msdata:Relationship name="User_PersonData1" msdata:parent="Manager" msdata:child="PersonData" msdata:parentkey="Id" msdata:childkey="UserId" msprop:Generator_UserChildTable="PersonData" msprop:Generator_ChildPropName="GetPersonDataRows" msprop:Generator_UserRelationName="User_PersonData1" msprop:Generator_RelationVarName="relationUser_PersonData1" msprop:Generator_UserParentTable="Manager" msprop:Generator_ParentPropName="ManagerRow" />
+      <msdata:Relationship name="Role_PersonData" msdata:parent="Role" msdata:child="PersonData" msdata:parentkey="Id" msdata:childkey="RoleId" msprop:Generator_UserChildTable="PersonData" msprop:Generator_ChildPropName="GetPersonDataRows" msprop:Generator_UserRelationName="Role_PersonData" msprop:Generator_RelationVarName="relationRole_PersonData" msprop:Generator_UserParentTable="Role" msprop:Generator_ParentPropName="RoleRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
