@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BagiraDanceStudio.Db.Models
 {
-    public class ScheduleAvailable
+    public class ScheduleAvailable : TableAbstract
     {
         public Guid Id { get; set; }
         public virtual Level Level { get; set; }
@@ -16,6 +16,11 @@ namespace BagiraDanceStudio.Db.Models
         public ScheduleAvailable()
         {
             SchedulesAssigned = new List<ScheduleAssigned>();
+        }
+
+        public override Guid GetId()
+        {
+            return Id;
         }
     }
 }

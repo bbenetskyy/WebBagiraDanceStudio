@@ -1,4 +1,5 @@
 ﻿using BagiraDanceStudio.Service.Interfaces;
+using BagiraDanceStudio.Service.Tools;
 using BagiraDanceStudio.Service.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -6,19 +7,24 @@ using System.Text;
 
 namespace BagiraDanceStudio.Service.Services
 {
-    public class RoleService : IAbstractRepositoryService<RoleViewModel>
+    public class RoleService : IRepositoryService<RoleViewModel>
     {
-        public bool Create(RoleViewModel obj)
+        public StatusManager Create(RoleViewModel obj)
         {
             throw new NotImplementedException();
         }
 
-        public bool Delete(RoleViewModel obj)
+        public StatusManager Delete(RoleViewModel obj)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(RoleViewModel obj)
+        public StatusManager Get(Guid? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public StatusManager Update(RoleViewModel obj)
         {
             throw new NotImplementedException();
         }

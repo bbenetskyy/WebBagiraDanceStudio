@@ -11,10 +11,11 @@ namespace BagiraDanceStudio.Db.Tools
     {
         public static IQueryable<TEntity> IncludeEntity<TEntity>(this IQueryable<TEntity> dbSetEntity, List<string> includedEntity) where TEntity : class
         {
-            foreach(string entity in includedEntity)
-            {
-                dbSetEntity = dbSetEntity.Include(entity);
-            }
+            if (includedEntity != null)
+                foreach (string entity in includedEntity)
+                {
+                    dbSetEntity = dbSetEntity.Include(entity);
+                }
             return dbSetEntity;
         }
     }

@@ -10,7 +10,7 @@ using BagiraDanceStudio.Db.Repository;
 
 namespace BagiraDanceStudio.Service.Services
 {
-    public class UserService : IAbstractRepositoryService<UserViewModel>
+    public class UserService : IRepositoryService<UserViewModel>
     {
         private IManagerExceptions managerExceptions;
         private IAbstractRepository abstractRepository;
@@ -18,57 +18,76 @@ namespace BagiraDanceStudio.Service.Services
         {
             abstractRepository = new AbstractRepository(db);
         }
-        public bool Create(UserViewModel obj)
+        public StatusManager Create(UserViewModel obj)
         {
-            return Execute(() => { abstractRepository.UsersRepository.Add(BuildUser(obj)); });
+            return Execute(() => { abstractRepository
+                                  .UsersRepository
+                                  .IncludeEntity<PersonData>()
+                                  .Add(BuildUser(obj));
+            });
         }
 
-        public bool Delete(UserViewModel obj)
+        public StatusManager Delete(UserViewModel obj)
         {
-            return Execute(() => { abstractRepository.UsersRepository.Remove(BuildUser(obj)); });
+            return Execute(() => { abstractRepository
+                                   .UsersRepository
+                                   .Remove(BuildUser(obj));
+            });
         }
 
-        public bool Update(UserViewModel obj)
+        public StatusManager Update(UserViewModel obj)
         {
-            return Execute(() => { return abstractRepository.UsersRepository.Update(BuildUser(obj)); });
+            return Execute(() => { return abstractRepository
+                                         .UsersRepository
+                                         .Update(BuildUser(obj));
+            });
         }
-        public dynamic Get(Guid? id)
+        public StatusManager Get(Guid? id)
         {
-            if (id is Guid ID)
+            if (id.HasValue)
             {
-                return Execute(() => { return abstractRepository.UsersRepository.FindById(ID); });
+                return Execute(() => { return abstractRepository
+                                             .UsersRepository
+                                             .FindById(id.Value);
+                });
             }
             else
             {
-                return Execute(() => { return abstractRepository.UsersRepository.FindAll(); });
+                return Execute(() => { return abstractRepository
+                                             .UsersRepository
+                                             .FindAll();
+                });
             }
         }
 
         #region [Execute]
-        public bool Execute(Action method)
+        public StatusManager Execute(Action method)
         {
+            StatusManager statusManager = new StatusManager();
             try
             {
                 method();
-                return true;
             }
             catch (Exception ex)
             {
-                managerExceptions.Print(ex.Message);
-                return false;
+                statusManager.ErrorMessage = ex;
+                statusManager.Log();
             }
+            return statusManager;
         }
-        public dynamic Execute(Func<dynamic> method)
+        public StatusManager Execute(Func<dynamic> method)
         {
+            StatusManager statusManager = new StatusManager();
             try
             {
-                return method();
+                statusManager.ReturnValue = method();
             }
             catch (Exception ex)
             {
-                managerExceptions.Print(ex.Message);
-                return null;
+                statusManager.ErrorMessage = ex;
+                statusManager.Log();
             }
+            return statusManager;
         }
         #endregion
 
@@ -78,7 +97,7 @@ namespace BagiraDanceStudio.Service.Services
             user.Balance = obj.Balance;
             user.TrainingPoints = obj.TrainingPoints;
             user.PersonData = obj.GetPersonData();
-            user.Manager = abstractRepository.PersonDataRepository.FindById(obj.IdManager);
+            //user.Manager = abstractRepository.PersonDataRepository.FindById(obj.IdManager);
             //user.Level = abstractRepository.Find(obj.LevelName);
             //user.BillingHistory = abstractRepository.PersonDataRepository.Find(obj.IdBillingHistory);
             return user;

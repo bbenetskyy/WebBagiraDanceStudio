@@ -12,7 +12,7 @@ namespace BagiraDanceStudio.Service.Tools
         {
             return null;
         }
-        public static PersonData GetPersonData(this ManagerViewModel mvm)
+        public static PersonData GetManagerData(this ManagerViewModel mvm)
         {
             return null;
         }

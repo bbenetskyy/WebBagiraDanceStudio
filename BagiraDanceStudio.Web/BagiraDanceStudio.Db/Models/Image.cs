@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BagiraDanceStudio.Db.Models
 {
-    public class Image
+    public class Image : TableAbstract
     {
         public Guid Id { get; set; }
         public virtual Tag TagId { get; set; }
@@ -16,6 +16,11 @@ namespace BagiraDanceStudio.Db.Models
         public Image()
         {
             CreationTime = DateTime.Now;
+        }
+
+        public override Guid GetId()
+        {
+            return Id;
         }
     }
 }

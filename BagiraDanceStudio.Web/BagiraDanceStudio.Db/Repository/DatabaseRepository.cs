@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BagiraDanceStudio.Db.Repository
 {
-    public class DatabaseRepository<TEntity> : IDatabaseRepository<TEntity>, IDisposable where TEntity : class
+    public class DatabaseRepository<TEntity> : IDatabaseRepository<TEntity>, IDisposable where TEntity : TableAbstract
     {
         private DataBaseContext _dbContext;
         private List<string> _includeEntity;
@@ -26,23 +26,23 @@ namespace BagiraDanceStudio.Db.Repository
         }
         public void Add(TEntity obj)
         {
-            this._dbContext.Set<TEntity>().Add(obj);
-            this._dbContext.SaveChanges();
+            _dbContext.Set<TEntity>().Add(obj);
+            _dbContext.SaveChanges();
         }
         public void Remove(TEntity obj)
         {
-            this._dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-            this._dbContext.Set<TEntity>().Remove(obj);
-            this._dbContext.SaveChanges();
+            _dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+            _dbContext.Set<TEntity>().Remove(obj);
+            _dbContext.SaveChanges();
         }
         public bool RemoveById(Guid id)
         {
             TEntity obj = FindById(id);
             if (obj != null)
             {
-                this._dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
-                this._dbContext.Set<TEntity>().Remove(obj);
-                this._dbContext.SaveChanges();
+                _dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                _dbContext.Set<TEntity>().Remove(obj);
+                _dbContext.SaveChanges();
                 return true;
             }
             return false;
@@ -51,39 +51,47 @@ namespace BagiraDanceStudio.Db.Repository
         {
             if (obj != null)
             {
-                this._dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                this._dbContext.Update<TEntity>(obj);
-                this._dbContext.SaveChanges();
+                _dbContext.Entry(obj).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                _dbContext.Update<TEntity>(obj);
+                _dbContext.SaveChanges();
             }
             return false;
         }
         public IEnumerable<TEntity> FindBy(Predicate<TEntity> predicate)
         {
-            return this._dbContext.Set<TEntity>().ToList<TEntity>().FindAll(predicate).ToList<TEntity>();
+            return _dbContext
+                .Set<TEntity>()
+                .IncludeEntity(_includeEntity)
+                .ToList<TEntity>()
+                .FindAll(predicate)
+                .ToList<TEntity>();
         }
         public TEntity FindById(Guid id)
         {
-            return this._dbContext.Set<TEntity>().Find(id);
-        }
-        public TEntity Find(object obj)
-        {
-            return this._dbContext.Set<TEntity>().Find(obj);
+            return _dbContext
+                .Set<TEntity>()
+                .Where(x => x.GetId() == id)
+                .IncludeEntity(_includeEntity)
+                .SingleOrDefault();
         }
         public IList<TEntity> FindAll()
         {
-            return this._dbContext.Set<TEntity>().IncludeEntity(this._includeEntity).ToList<TEntity>();
+            return _dbContext
+                .Set<TEntity>()
+                .IncludeEntity(_includeEntity)
+                .ToList<TEntity>();
         }
         public DatabaseRepository<TEntity> IncludeEntity<Q>() where Q : class
         {
-            if (!this._includeEntity.Any(x => x.Equals(typeof(Q).Name)))
-                this._includeEntity.Add(typeof(Q).Name);
+            if (!_includeEntity.Any(x => x.Equals(typeof(Q).Name)))
+                _includeEntity.Add(typeof(Q).Name);
             return this;
         }
         public DatabaseRepository<TEntity> ExcludeEntity<Q>() where Q : class
         {
             string nameEntity = typeof(Q).Name;
             if (_includeEntity.Any(x => x.Equals(nameEntity)))
-                this._includeEntity.Remove(nameEntity);
+                _includeEntity.Remove(nameEntity);
             return this;
         }
 

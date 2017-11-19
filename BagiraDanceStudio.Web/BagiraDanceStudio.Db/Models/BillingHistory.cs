@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace BagiraDanceStudio.Db.Models
 {
-    public class BillingHistory
+    public class BillingHistory : TableAbstract
     {
         public Guid Id { get; set; }
         public virtual User UserId { get; set; }
@@ -14,6 +15,10 @@ namespace BagiraDanceStudio.Db.Models
         public BillingHistory()
         {
             BillingTime = DateTime.Now;
+        }
+        public override Guid GetId()
+        {
+            return Id;
         }
     }
 }

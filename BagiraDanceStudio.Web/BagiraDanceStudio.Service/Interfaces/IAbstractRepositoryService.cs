@@ -1,14 +1,15 @@
-﻿using System;
+﻿using BagiraDanceStudio.Service.Tools;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BagiraDanceStudio.Service.Interfaces
 {
-    interface IAbstractRepositoryService<TEntity> where TEntity : class
+    interface IRepositoryService<TEntity> where TEntity : class
     {
-        bool Create(TEntity obj);
-        bool Update(TEntity obj);
-        bool Delete(TEntity obj);
-        dynamic Get(Guid? id);
+        StatusManager Create(TEntity obj);
+        StatusManager Update(TEntity obj);
+        StatusManager Delete(TEntity obj);
+        StatusManager Get(Guid? id);
     }
 }

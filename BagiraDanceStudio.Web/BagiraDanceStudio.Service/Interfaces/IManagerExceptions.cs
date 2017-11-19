@@ -6,6 +6,6 @@ namespace BagiraDanceStudio.Service.Interfaces
 {
     interface IManagerExceptions
     {
-        void Print(string message);
+        void Log(string message);
     }
 }

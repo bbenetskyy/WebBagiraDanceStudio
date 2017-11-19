@@ -18,6 +18,7 @@ namespace BagiraDanceStudio.Db.Models
         public DbSet<ScheduleAvailable> SchedulesAvailable { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Manager> Managers { get; set; }
 
         //public DataBaseContext(DbContextOptions<DataBaseContext> options)
         //    : base(options)
