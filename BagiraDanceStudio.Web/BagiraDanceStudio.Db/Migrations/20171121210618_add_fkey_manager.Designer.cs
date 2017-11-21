@@ -11,9 +11,10 @@ using System;
 namespace BagiraDanceStudio.Db.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    partial class DataBaseContextModelSnapshot : ModelSnapshot
+    [Migration("20171121210618_add_fkey_manager")]
+    partial class add_fkey_manager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -123,15 +124,14 @@ namespace BagiraDanceStudio.Db.Migrations
 
                     b.Property<DateTime>("ContractDate");
 
-                    b.Property<Guid?>("PersonDataId");
+                    b.Property<Guid>("PersonDataId");
 
                     b.Property<decimal>("Salary");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PersonDataId")
-                        .IsUnique()
-                        .HasFilter("[PersonDataId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Managers");
                 });
@@ -302,7 +302,8 @@ namespace BagiraDanceStudio.Db.Migrations
                 {
                     b.HasOne("BagiraDanceStudio.Db.Models.PersonData", "PersonData")
                         .WithOne("Manager")
-                        .HasForeignKey("BagiraDanceStudio.Db.Models.Manager", "PersonDataId");
+                        .HasForeignKey("BagiraDanceStudio.Db.Models.Manager", "PersonDataId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BagiraDanceStudio.Db.Models.PersonData", b =>

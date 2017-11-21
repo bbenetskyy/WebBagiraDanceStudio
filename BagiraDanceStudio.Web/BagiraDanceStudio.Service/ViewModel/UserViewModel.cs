@@ -21,10 +21,15 @@ namespace BagiraDanceStudio.Service.ViewModel
         public string HashedPassword { get; set; }
 
         //Role data
-        public string Name { get; set; }
-        public int Priority { get; set; }
+        public string Role_Name { get; set; }
+        public int Role_Priority { get; set; }
 
         public Guid IdManager { get; set; }
+        public string FName_Manager { get; set; }
+        public string LName_Manager { get; set; }
+        public string Email_Manager { get; set; }
+        public string Phone_Manager { get; set; }
+
         //public PersonData Manager { get; set; }
         public Guid IdBillingHistory { get; set; }
         //public BillingHistory BillingHistory { get; set; }

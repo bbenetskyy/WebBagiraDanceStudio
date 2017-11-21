@@ -9,7 +9,7 @@ namespace BagiraDanceStudio.Service.Tools
     public static class EntityExtension
     {
         public static PersonData GetPersonData(this UserViewModel uvm)
-        {
+        { 
             return null;
         }
         public static PersonData GetManagerData(this ManagerViewModel mvm)

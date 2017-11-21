@@ -37,7 +37,7 @@ namespace BagiraDanceStudio.Web
             
             services.AddDbContext<DataBaseContext>();
             services.AddMvc();
-            services.AddScoped<IAbstractRepository, AbstractRepository>();
+            //services.AddScoped<IAbstractRepository, AbstractRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

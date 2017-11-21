@@ -14,6 +14,15 @@ namespace BagiraDanceStudio.Db.Repository
     {
         private DataBaseContext _dbContext;
         private List<string> _includeEntity;
+        private IQueryable<TEntity> _dbContextEntityIncluded
+        {
+            get
+            {
+                return _dbContext
+                .Set<TEntity>()
+                .IncludeEntity(_includeEntity);
+            }
+        }
         public DatabaseRepository(DataBaseContext dbContext)
         {
             _dbContext = dbContext;
@@ -59,26 +68,20 @@ namespace BagiraDanceStudio.Db.Repository
         }
         public IEnumerable<TEntity> FindBy(Predicate<TEntity> predicate)
         {
-            return _dbContext
-                .Set<TEntity>()
-                .IncludeEntity(_includeEntity)
+            return _dbContextEntityIncluded
                 .ToList<TEntity>()
                 .FindAll(predicate)
                 .ToList<TEntity>();
         }
         public TEntity FindById(Guid id)
         {
-            return _dbContext
-                .Set<TEntity>()
+            return _dbContextEntityIncluded
                 .Where(x => x.GetId() == id)
-                .IncludeEntity(_includeEntity)
                 .SingleOrDefault();
         }
         public IList<TEntity> FindAll()
         {
-            return _dbContext
-                .Set<TEntity>()
-                .IncludeEntity(_includeEntity)
+            return _dbContextEntityIncluded
                 .ToList<TEntity>();
         }
         public DatabaseRepository<TEntity> IncludeEntity<Q>() where Q : class

@@ -7,55 +7,65 @@ using System.Text;
 using BagiraDanceStudio.Service.Tools;
 using BagiraDanceStudio.Db.Interfaces;
 using BagiraDanceStudio.Db.Repository;
+using AutoMapper;
 
 namespace BagiraDanceStudio.Service.Services
 {
-    public class UserService : IRepositoryService<UserViewModel>
+    public class UserService : BaseService, IRepositoryService<UserViewModel>
     {
-        private IManagerExceptions managerExceptions;
-        private IAbstractRepository abstractRepository;
-        public UserService(DataBaseContext db)
+        private AbstractRepository abstractRepository;
+        public UserService(DataBaseContext db) : base()
         {
             abstractRepository = new AbstractRepository(db);
         }
         public StatusManager Create(UserViewModel obj)
         {
-            return Execute(() => { abstractRepository
-                                  .UsersRepository
-                                  .IncludeEntity<PersonData>()
-                                  .Add(BuildUser(obj));
+            return Execute(() =>
+            {
+                abstractRepository
+               .UsersRepository
+               .IncludeEntity<PersonData>()
+               .Add(Mapper.Map<UserViewModel, User>(obj));
             });
         }
 
         public StatusManager Delete(UserViewModel obj)
         {
-            return Execute(() => { abstractRepository
-                                   .UsersRepository
-                                   .Remove(BuildUser(obj));
+            return Execute(() =>
+            {
+                abstractRepository
+                .UsersRepository
+                .Remove(Mapper.Map<UserViewModel, User>(obj));
             });
         }
 
         public StatusManager Update(UserViewModel obj)
         {
-            return Execute(() => { return abstractRepository
-                                         .UsersRepository
-                                         .Update(BuildUser(obj));
+            return Execute(() =>
+            {
+                return abstractRepository
+                      .UsersRepository
+                      .Update(Mapper.Map<UserViewModel, User>(obj));
             });
         }
         public StatusManager Get(Guid? id)
         {
             if (id.HasValue)
             {
-                return Execute(() => { return abstractRepository
-                                             .UsersRepository
-                                             .FindById(id.Value);
+                return Execute(() =>
+                {
+                    return Mapper.Map<User,UserViewModel>(abstractRepository
+                          .UsersRepository
+                          .FindById(id.Value));
                 });
             }
             else
             {
-                return Execute(() => { return abstractRepository
-                                             .UsersRepository
-                                             .FindAll();
+                return Execute(() =>
+                {
+                    return Mapper.Map<IList<User>, List<UserViewModel>>(abstractRepository
+                          .UsersRepository
+                          .FindAll());
                 });
             }
         }
@@ -90,17 +100,5 @@ namespace BagiraDanceStudio.Service.Services
             return statusManager;
         }
         #endregion
-
-        public User BuildUser(UserViewModel obj)
-        {
-            User user = new User();
-            user.Balance = obj.Balance;
-            user.TrainingPoints = obj.TrainingPoints;
-            user.PersonData = obj.GetPersonData();
-            //user.Manager = abstractRepository.PersonDataRepository.FindById(obj.IdManager);
-            //user.Level = abstractRepository.Find(obj.LevelName);
-            //user.BillingHistory = abstractRepository.PersonDataRepository.Find(obj.IdBillingHistory);
-            return user;
-        }
     }
 }
